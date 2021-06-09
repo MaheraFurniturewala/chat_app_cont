@@ -1,0 +1,17 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  padding-inline-start: 0px; }
+
+header {
+  color: white; }
+  header ul {
+    display: flex;
+    background-color: blue; }
+    header ul li {
+      text-decoration: none;
+      list-style: none; }
+      header ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 50px; }

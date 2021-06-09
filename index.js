@@ -12,9 +12,9 @@ const MongoStore=require('connect-mongo')(session);
 const sassMiddleware=require('node-sass-middleware');
 app.use(sassMiddleware({
     // source=where do i pick up the scss files to convert to css
-    src: '/assets/scss',
+    src: './assets/scss',
     //where do i need to put my css files
-    dest: '/assets/css',
+    dest: './assets/css',
     // whatever info you see while you see in the terminal when server is running do i want to display errors in compilation 
     // you would put it to false when in production mode
     debug: true,

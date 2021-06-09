@@ -1,7 +1,8 @@
 <header>
-    Page Header
+
 
     <ul>
+        <li>Codeial</li>
         <% if (locals.user){ %>
             <li>
                 <a href="/users/profile">
@@ -11,18 +12,18 @@
             <li>
                 <a href="/users/sign-out">Sign Out</a>
             </li>
-        <% }else{ %>
+            <% }else{ %>
+                
+                <li>
+                    <a href="/users/sign-in">Sign In</a>
+                </li>
 
-            <li>
-                <a href="/users/sign-in">Sign In</a>
-            </li>
+                <li>
+                    <a href="/users/sign-up">Sign Up</a>
+                </li>
+            
 
-            <li>
-                <a href="/users/sign-up">Sign Up</a>
-            </li>
-
-
-        <% } %>
+                <% } %>
     </ul>
 
 </header>
