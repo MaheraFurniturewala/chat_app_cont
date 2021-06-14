@@ -15,7 +15,16 @@ module.exports.home = function(req, res){
     //here the syntax changes
     //whenever you are making the query longer you write down the whole  query and then callback
     //you are finding all the posts and populating user of each pos
-    Post.find({}).populate('user').exec(function(err,posts){
+    Post.find({})
+    //we are populating multiple models-->1)the comment and  the user of that comment
+    .populate('user')
+    .populate({
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .exec(function(err,posts){
         return res.render('home',{
             title: "Codeial | Home",
             posts : posts
