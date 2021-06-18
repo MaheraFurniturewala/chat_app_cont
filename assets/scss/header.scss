@@ -9,12 +9,14 @@ header{
     color:white;
        ul{
             display: flex;
-            background-color: blue;
+            background-color: rgb(50, 50, 150);
+            height:5%;
             
     
             li{
                 text-decoration: none;
                 list-style: none;
+                padding:5px;
                 a{
                     color: white;
                     text-decoration: none;

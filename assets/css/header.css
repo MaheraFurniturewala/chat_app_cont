@@ -7,10 +7,12 @@ header {
   color: white; }
   header ul {
     display: flex;
-    background-color: blue; }
+    background-color: #323296;
+    height: 5%; }
     header ul li {
       text-decoration: none;
-      list-style: none; }
+      list-style: none;
+      padding: 5px; }
       header ul li a {
         color: white;
         text-decoration: none;
