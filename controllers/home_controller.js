@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 
 module.exports.home = function(req, res){
@@ -17,6 +18,7 @@ module.exports.home = function(req, res){
     //you are finding all the posts and populating user of each pos
     Post.find({})
     //we are populating multiple models-->1)the comment and  the user of that comment
+    //nested prepopulating
     .populate('user')
     .populate({
         path:'comments',
@@ -25,10 +27,17 @@ module.exports.home = function(req, res){
         }
     })
     .exec(function(err,posts){
-        return res.render('home',{
-            title: "Codeial | Home",
-            posts : posts
-        });
+
+          User.find({},function(err,users){
+
+            return res.render('home',{
+                title: "Codeial | Home",
+                posts : posts,
+                all_users: users
+            });
+          })
+
+        
     });
 }
     

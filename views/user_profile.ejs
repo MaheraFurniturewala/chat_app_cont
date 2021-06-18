@@ -3,5 +3,24 @@
             Codeial / Profile Page
         </h1>
 
-        <p><%= user.name %></p>
-        <p><%= user.email %></p>
+        
+        
+        <!-- display an update form only if signed in user is viewing his or her own profile page -->
+        <!--user.id =>the user who us signed in and profile_user.id=>id of person who's profile page is being viewed -->
+        <!-- string matching  -->
+
+        <% if(user.id == profile_user.id){  %>
+            <!-- if user matches then i show the form -->
+            <form action="/users/update/<%= profile_user.id %>" method="POST">
+                  <!-- not updating password rn only name and email -->
+                  <!-- value attribute is to set the initial value -->
+                  <input type="text" name="name" placeholder="Your Name" value =" <%= profile_user.name %>"  required>
+                  <input type="text" name="email" placeholder="Your Email" value =" <%= profile_user.email %>"  required>
+                  <input type="submit" value="Update">
+            </form>
+
+        <% }else{ %>
+                <!--  else show only the profile information -->
+                <p><%= profile_user.name %></p>
+                <p><%= profile_user.email %></p>
+                <% } %>

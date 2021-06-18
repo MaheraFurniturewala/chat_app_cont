@@ -2,9 +2,28 @@ const User = require('../models/user');
 
 
 module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: 'User Profile'
-    })
+    User.findById(req.params.id,function(err,user){
+        return res.render('user_profile', {
+    
+            title: 'User Profile',
+            // cannot use user since it is already in locals so we need to use some other variable
+            profile_user: user
+        });
+
+    });
+}
+
+module.exports.update = function(req,res){
+    //first we need to check that the current signd in useer is same as user who is making update request . because nyone could make an id and change the id in the form and the profile would actually get updated
+    if(req.user.id == req.params.id){
+        // updating the body of the request i.e. the name and the mail OR we could do: {name:req.body.name, email: req.body.email}
+        User.findByIdAndUpdate(req.params.id, req.body, function(err,user){
+            return res.redirect('back');
+        });
+// now if someone is fiddling with system: usig http status codes
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
 }
 
 
@@ -17,7 +36,7 @@ module.exports.signUp = function(req, res){
 
     return res.render('user_sign_up', {
         title: "Codeial | Sign Up"
-    })
+    });
 }
 
 
@@ -29,7 +48,7 @@ module.exports.signIn = function(req, res){
     }
     return res.render('user_sign_in', {
         title: "Codeial | Sign In"
-    })
+    });
 }
 
 // get the sign up data
