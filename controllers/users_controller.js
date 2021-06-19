@@ -1,4 +1,5 @@
 const User = require('../models/user');
+//no asyync here since only one callback 
 
 
 module.exports.profile = function(req, res){
