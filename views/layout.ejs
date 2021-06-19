@@ -3,6 +3,8 @@
         <title>
             <%= title  %>
         </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <link rel="stylesheet" href="/css/layout.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
@@ -12,13 +14,13 @@
     <body>
         <%- include('_header'); %>
         <!-- if flash is success and there is a message in the success key  i.e. legth .0 since it should not be an empty string or object-->
-        <% if(flash.success && (flash.success.length > 0)){ %>
-            <h5>
-                <%= flash.success  %>
-            </h5>
-            <!-- if you refresh that flash message will be gone -->
+        <!-- <% if(flash.success && (flash.success.length > 0)){ %> -->
+            <!-- <h5> -->
+                <!-- <%= flash.success  %> -->
+            <!-- </h5> -->
+          <!-- if you refresh that flash message will be gone -->   
 
-            <% } %>
+            <!-- <% } %>  -->
 
         <main id="layout-main">
             <%- body %>
@@ -28,6 +30,32 @@
         <%- include('_footer'); %>
 
         <%- script %>
+
+        <script>
+            <% if(flash.success && flash.success.length > 0) { %>
+                new Noty({
+                        theme  : 'relax',
+                        text: "<%= flash.success %>",
+                        // type-->color scheme
+                        type : 'success',
+                        //where do we want it to be displayesd
+                        layout : 'topRight',
+                        timeout : 1500  //ms
+                    }).show();
+                <% } %>
+            <% if(flash.error && flash.error.length > 0) { %>
+                new Noty({
+                        theme  : 'relax',
+                        text: "<%= flash.error %>",
+                        // type-->color scheme
+                        type : 'error',
+                        //where do we want it to be displayesd
+                        layout : 'topRight',
+                        timeout : 1500  //ms
+                    }).show();
+                <% } %>
+
+        </script>
         
     </body>
 </html>
