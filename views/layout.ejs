@@ -11,6 +11,15 @@
 
     <body>
         <%- include('_header'); %>
+        <!-- if flash is success and there is a message in the success key  i.e. legth .0 since it should not be an empty string or object-->
+        <% if(flash.success && (flash.success.length > 0)){ %>
+            <h5>
+                <%= flash.success  %>
+            </h5>
+            <!-- if you refresh that flash message will be gone -->
+
+            <% } %>
+
         <main id="layout-main">
             <%- body %>
         </main>
