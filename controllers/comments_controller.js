@@ -40,11 +40,13 @@ try{
         post.comments.push(comment);
         post.save();
 
+        req.flash('success',"Comment published");
+
         res.redirect('/');
     }
 }catch(err){
-    console.log("Error" , err);
-    return;
+    req.flash('error',err);
+    return res.redirect('back');
 }
 
    
@@ -61,13 +63,16 @@ module.exports.destroy = async function(req,res){
             comment.remove();
             //we need to remove and update the collection, pull:id which i need to pull out from connects(close to native mongodb syntax )
             let post = await Post.findByIdAndUpdate(postId, {$pull : {comments : req.params.id}});
+
+            req.flash('success',"Comment deleted");
+
             return res.redirect('back');
         }else{
             return res.redirect('back');
         }
     }catch(err){
-        console.log("Error",err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
     
 }

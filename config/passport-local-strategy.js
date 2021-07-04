@@ -4,21 +4,25 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/user');
 
-
+//this is the callback after the user signs in(but it does not have any request object being passed to it)  for this we set property pass request to callback-->tru
 // authentication using passport
 passport.use(new LocalStrategy({
-        usernameField: 'email'
+        usernameField: 'email',
+        //this  allows us to set the first arguement as req
+        passReqToCallback : true
+
     },
-    function(email, password, done){
+    function(req,email, password, done){
         // find a user and establish the identity
         User.findOne({email: email}, function(err, user)  {
             if (err){
-                console.log('Error in finding user --> Passport');
+                req.flash('error' ,err)
                 return done(err);
             }
 
             if (!user || user.password != password){
-                console.log('Invalid Username/Password');
+                //we do not want to tell whether username is wrong or password is erong because if the user knows password is wrong then hacker will know your username
+                req.flash('error', 'Invalid username/Password');
                 return done(null, false);
             }
 
