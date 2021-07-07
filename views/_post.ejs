@@ -1,4 +1,4 @@
-<li>
+<li id="post-<%=post._id%>">
     <p>
         <!-- comparing as strings -->
         <% if (locals.user && (locals.user.id==post.user.id)){ %>
@@ -6,7 +6,8 @@
 
 
             <small>
-                <a href="posts/destroy/<%= post.id %>">X</a>
+                <!-- delete button -->
+                <a class="delete-post-button" href="posts/destroy/<%= post.id %>">X</a>
                 <!-- same as ._id since it  is going to be converted to a string -->
             </small>
             <% } %>

@@ -37,10 +37,10 @@ const User = require('../models/user');
 //             });
 //           })
 
-        
+
 //     });
 // }
-    
+
 
 
 // 3 ways in which this can be executed 1)normal as shown above using exec  2)Promises  3)Async-Await
@@ -66,33 +66,35 @@ const User = require('../models/user');
 
 //async declares that this function contans some async statemnets
 
-module.exports.home = async function(req, res){
-    try{
+module.exports.home = async function (req, res) {
+    try {
         //success response will be stored in posts variable i.e. the list of all the post objects
         let posts = await Post.find({})
-    .populate('user')
-    .populate({
-        path: 'comments',
-        populate: {
-            path: 'user'
-        }
-    });
-    //all the users being found will be stored in users variable
-    let users = await User.find({});
-        
-    return res.render('home', {
-        title: "Codeial | Home",
-        posts:  posts,
-        all_users: users
-    });
+            //to get latest posts on top
+            .sort('-createdAt')
+            .populate('user')
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'user' 
+                }
+            });
+        //all the users being found will be stored in users variable
+        let users = await User.find({});
 
-    }catch(err){
+        return res.render('home', {
+            title: "Codeial | Home",
+            posts: posts,
+            all_users: users
+        });
+
+    } catch (err) {
         console.log("Error", err);
         return;
 
     }
 
-    
+
 }
 
 
